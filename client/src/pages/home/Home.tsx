@@ -1,3 +1,4 @@
+import NarrowLayout from "@/components/common/NarrowLayout";
 import CityList from "@/components/home/CityList";
 import FilterList from "@/components/home/FilterList";
 import SearchInput from "@/components/home/SearchInput";
@@ -9,8 +10,8 @@ export default function Home() {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="max-w-[655px] w-full mx-auto">
-      <div className="max-w-[339px] w-full mx-auto mb-24">
+    <NarrowLayout className="my-30 flex flex-col items-center">
+      <div className="w-[339px] mb-24">
         <SearchInput
           value={search}
           onChange={setSearch}
@@ -21,7 +22,7 @@ export default function Home() {
         <FilterList active="all" onChange={() => {}} />
       </div>
       <CityList cities={DUMMY_DATA} />
-    </div>
+    </NarrowLayout>
   );
 }
 
