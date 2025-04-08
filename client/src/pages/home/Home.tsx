@@ -3,20 +3,14 @@ import CityList from "@/components/home/CityList";
 import FilterList from "@/components/home/FilterList";
 import SearchInput from "@/components/home/SearchInput";
 import { City } from "@/type";
-import { useState } from "react";
 
 export default function Home() {
   // const {data} = useQuery()
-  const [search, setSearch] = useState("");
 
   return (
     <NarrowLayout className="my-30 flex flex-col items-center">
       <div className="w-[339px] mb-24">
-        <SearchInput
-          value={search}
-          onChange={setSearch}
-          onCompositionEnd={(value) => console.log(value)}
-        />
+        <SearchInput onCompositionEnd={(value) => console.log(value)} />
       </div>
       <div className="mb-21">
         <FilterList active="all" onChange={() => {}} />
