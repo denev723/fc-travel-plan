@@ -4,6 +4,7 @@ import FlighIcon from "@/assets/icons/airplanemode_active.svg?react";
 import VisaIcon from "@/assets/icons/airplane_ticket.svg?react";
 import VoltageIcon from "@/assets/icons/power.svg?react";
 import ClockIcon from "@/assets/icons/schedule.svg?react";
+import Button from "../common/Button";
 
 interface Props {
   city: City;
@@ -61,10 +62,10 @@ export default function CityDetail({ city }: Props) {
         <img src={city.thumbnail} alt={city.name} className="w-[261px] rounded-10" />
       </div>
       <div>
-        <button className="w-[185px] bg-black text-white text-16 font-medium rounded-6 py-14 flex items-center justify-center">
+        <Button className="w-[185px] flex items-center justify-center">
           <span className="ml-8">일정만들기</span>
           <ArrowIcon className="ml-5" />
-        </button>
+        </Button>
       </div>
     </div>
   );

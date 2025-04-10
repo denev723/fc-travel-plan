@@ -1,18 +1,20 @@
-import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import "./TravelDateSelector.css";
 import ArrowLeftIcon from "@/assets/icons/keyboard_arrow_left.svg?react";
 
-export default function TravelDateSelector() {
+interface Props {
+  startDate: Date | null;
+  endDate: Date | null;
+  onChange: (start: Date | null, end: Date | null) => void;
+}
+
+export default function TravelDateSelector({ startDate, endDate, onChange }: Props) {
   const today = new Date();
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleChange = ([start, end]: [Date | null, Date | null]) => {
-    setStartDate(start);
-    setEndDate(end);
+    onChange(start, end);
   };
 
   return (
