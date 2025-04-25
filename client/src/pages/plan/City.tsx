@@ -1,7 +1,7 @@
 import Loading from "@/components/common/Loading";
 import WideLayout from "@/components/common/WideLayout";
 import Map from "@/components/plan/Map";
-import PlanControler from "@/components/plan/PlanControler";
+import PlanControler from "@/components/plan/PlanController";
 import TravelPeriodModal from "@/components/plan/TravelPeriodModal";
 import { getCity } from "@/services/plan";
 import { usePlanStore } from "@/store";
