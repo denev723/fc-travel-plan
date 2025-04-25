@@ -18,7 +18,11 @@ export default function Wizard({ steps }: Props) {
   };
   return (
     <div className="flex">
-      <Steps steps={steps} currentStep={currentStep} onChangeStep={onNext} />
+      <Steps
+        steps={steps}
+        currentStep={currentStep}
+        onChangeStep={setCurrentStep}
+      />
       {steps[currentStep].content({ onNext })}
     </div>
   );
