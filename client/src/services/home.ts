@@ -1,4 +1,4 @@
-import { City } from "@/type";
+import { City } from "@/types";
 
 export const getCities = async (): Promise<City[]> => {
   const response = await fetch("/api/cities");

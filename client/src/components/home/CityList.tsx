@@ -1,4 +1,4 @@
-import { City } from "@/type";
+import { City } from "@/types";
 import Card from "./Card";
 import { useModalStore } from "@/store";
 import Modal, { ModalBackdrop, ModalPanel } from "../common/Modal";

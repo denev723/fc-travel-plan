@@ -16,7 +16,9 @@ cityRouter.get("/", (_, res) => {
           return res.status(404).send("Countries not found");
         } else {
           const newCities = cities.map((city) => {
-            const country = countries.find((country) => country.code === city.country);
+            const country = countries.find(
+              (country) => country.code === city.country
+            );
             return { ...city, country };
           });
           return res.send(newCities);
@@ -40,7 +42,9 @@ cityRouter.get("/search", (req, res) => {
       res.status(500).send(err);
     }
 
-    const searchCountries = countries.filter((country) => country.name.match(queryRegex));
+    const searchCountries = countries.filter((country) =>
+      country.name.match(queryRegex)
+    );
 
     const countriesRegex = new RegExp(
       searchCountries.map((country) => country.code).join("|"),
@@ -59,7 +63,9 @@ cityRouter.get("/search", (req, res) => {
         return res.status(500).send(err);
       }
       const newCities = cities.map((city) => {
-        const country = countries.find((country) => country.code === city.country);
+        const country = countries.find(
+          (country) => country.code === city.country
+        );
         return { ...city, country };
       });
       return res.send(newCities);
@@ -68,21 +74,24 @@ cityRouter.get("/search", (req, res) => {
 });
 
 cityRouter.get("/:city", (req, res) => {
-  citiesDB.findOne({ city: req.params.city }, (err: Error | null, city: City) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      countriesDB.findOne({ code: city.country }, (err, country) => {
-        if (err) {
-          return res.status(500).send(err);
-        } else if (!country) {
-          return res.status(404).send("Country not found");
-        } else {
-          return res.send({ ...city, country });
-        }
-      });
+  citiesDB.findOne(
+    { code: req.params.city },
+    (err: Error | null, city: City) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        countriesDB.findOne({ code: city.country }, (err, country) => {
+          if (err) {
+            return res.status(500).send(err);
+          } else if (!country) {
+            return res.status(404).send("Country not found");
+          } else {
+            return res.send({ ...city, country });
+          }
+        });
+      }
     }
-  });
+  );
 });
 
 cityRouter.post("/", (req, res) => {
