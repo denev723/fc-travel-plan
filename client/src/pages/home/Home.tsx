@@ -3,7 +3,7 @@ import Modal, { ModalBackdrop, ModalPanel } from "@/components/common/Modal";
 import NarrowLayout from "@/components/common/NarrowLayout";
 import CityList from "@/components/home/CityList";
 import FilterList from "@/components/home/FilterList";
-import SearchInput from "@/components/home/SearchInput";
+import SearchInput from "@/components/common/SearchInput";
 import { getCities, getSearchedCities } from "@/services/home";
 import { useModalStore } from "@/store";
 import { useQuery } from "@tanstack/react-query";
@@ -39,7 +39,7 @@ export default function Home() {
       <button onClick={handleClick}>open modal</button>
       <NarrowLayout className="my-30 flex flex-col items-center">
         <div className="w-[339px] mb-24">
-          <SearchInput onCompositionEnd={(value) => setQ(value)} />
+          <SearchInput onSearch={(value) => setQ(value)} />
         </div>
         <div className="mb-21">
           <FilterList active="all" onChange={() => {}} />
