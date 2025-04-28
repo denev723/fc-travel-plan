@@ -1,10 +1,11 @@
 import { usePlanStore } from "@/store";
 import DailyTimeController from "./DailyTimeController";
 import PlanControllerHeader from "./PlanControllerHeader";
-import Wizard from "../common/\bWizard";
+import Wizard from "../common/Wizard";
 import PlaceController from "./PlaceController";
 import PlaceContainer from "./PlaceContainer";
-import AccommodationContainer from "./\bAccommodationContainer";
+import AccommodationContainer from "./AccommodationContainer";
+import AccommodationController from "./AccommodationController";
 
 export default function PlanControler() {
   const { startDate, endDate } = usePlanStore();
@@ -63,7 +64,9 @@ export default function PlanControler() {
                     <AccommodationContainer />
                   </div>
                 </div>
-                <div className="px-24 py-30">{/* <PlaceController /> */}</div>
+                <div className="px-24 py-30">
+                  <AccommodationController />
+                </div>
               </div>
             ),
           },

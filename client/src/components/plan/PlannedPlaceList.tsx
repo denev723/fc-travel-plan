@@ -23,7 +23,7 @@ export default function PlannedPlaceList({
     <div>
       {plannedPlace.map((plannedPlace, index) => (
         <PlannedPlace
-          key={`${plannedPlace.place.name}-${index}`}
+          key={index}
           plannedPlace={plannedPlace}
           index={index}
           onDeletePlace={() => onDeletePlace(index)}

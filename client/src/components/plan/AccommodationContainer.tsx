@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 import { getPlaces } from "@/services/plan";
 import Loading from "../common/Loading";
 import PlaceList from "./PlaceList";
+import { usePlanStore } from "@/store";
 
 export default function AccommodationContainer() {
   const { city } = useParams();
   const [q, setQ] = useState("");
+  const { addPlannedAccommodation } = usePlanStore();
 
   const { isLoading, data } = useQuery({
     queryKey: ["places", city, q],
@@ -33,7 +35,7 @@ export default function AccommodationContainer() {
         ) : (
           <PlaceList
             places={data}
-            onAddPlace={(place: Place) => console.log(place)}
+            onAddPlace={(place: Place) => addPlannedAccommodation(place)}
           />
         )}
       </div>

@@ -21,7 +21,7 @@ export default function DailyTimeController({
       <p className="text-17 tracking-[0.17px] font-medium flex items-center gap-x-16">
         <span>여행시간 상세설명</span>
         <span className="text-[#5a88ff]">
-          총 {printTime(parseTime(totalTime))}
+          {printTime(parseTime(totalTime))}
         </span>
         <button onClick={() => setHidden((prev) => !prev)}>
           <UpArrowIcon className={cn({ "rotate-180": !hidden })} />
