@@ -4,6 +4,7 @@ import { useState } from "react";
 import cn from "classnames";
 import { format } from "date-fns";
 import Button from "../common/Button";
+import { getTotalTime, parseTime, printTime } from "@/utils/time";
 
 export default function DailyTimeController({
   onCompleted,
@@ -13,19 +14,14 @@ export default function DailyTimeController({
   const [hidden, setHidden] = useState(false);
   const { dailyTimes, setDailyTimes } = usePlanStore();
 
-  const totalTime = dailyTimes.reduce((acc, dailyTime) => {
-    const dailyTotalTime =
-      transformTimeToMinutes(dailyTime.endTime) -
-      transformTimeToMinutes(dailyTime.startTime);
-    return acc + dailyTotalTime;
-  }, 0);
+  const totalTime = getTotalTime(dailyTimes);
 
   return (
     <div className="text-left flex flex-col gap-y-18 w-[368px]">
       <p className="text-17 tracking-[0.17px] font-medium flex items-center gap-x-16">
         <span>여행시간 상세설명</span>
         <span className="text-[#5a88ff]">
-          총 {formatMintesToTime(totalTime)}
+          총 {printTime(parseTime(totalTime))}
         </span>
         <button onClick={() => setHidden((prev) => !prev)}>
           <UpArrowIcon className={cn({ "rotate-180": !hidden })} />
@@ -86,13 +82,3 @@ export default function DailyTimeController({
     </div>
   );
 }
-
-const transformTimeToMinutes = (time: string) => {
-  return parseInt(time.slice(0, 2), 10) * 60 + parseInt(time.slice(3), 10) * 1;
-};
-
-const formatMintesToTime = (minutes: number) => {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  return `${hours}시간 ${String(mins).padStart(2, "0")}분`;
-};

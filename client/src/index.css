@@ -9,6 +9,9 @@
 
 body {
   min-height: 100vh;
+}
+
+body * {
   line-height: 100%;
 }
 

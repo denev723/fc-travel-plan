@@ -2,8 +2,8 @@ import { usePlanStore } from "@/store";
 import DailyTimeController from "./DailyTimeController";
 import PlanControllerHeader from "./PlanControllerHeader";
 import Wizard from "../common/\bWizard";
-import { PropsWithChildren } from "react";
 import PlaceController from "./PlaceController";
+import PlaceContainer from "./PlaceContainer";
 
 export default function PlanControler() {
   const { startDate, endDate } = usePlanStore();
@@ -14,42 +14,47 @@ export default function PlanControler() {
           {
             title: "날짜 확인",
             content: ({ onNext }) => (
-              <Layout startDate={startDate} endDate={endDate}>
+              <div className="px-24 py-30 flex flex-col gap-y-18 overflow-y-hidden h-full">
+                <PlanControllerHeader startDate={startDate} endDate={endDate} />
                 <DailyTimeController onCompleted={onNext} />
-              </Layout>
+              </div>
             ),
           },
           {
             title: "장소 선택",
             content: () => (
-              <Layout startDate={startDate} endDate={endDate}>
-                <PlaceController />
-              </Layout>
+              <div className="flex">
+                <div className="px-24 py-30 flex flex-col gap-y-18 overflow-y-hidden h-full">
+                  <PlanControllerHeader
+                    startDate={startDate}
+                    endDate={endDate}
+                  />
+                  <div className="h-full">
+                    <div className="p-14 border-b-3 border-b-main mb-18">
+                      <h4 className="text-18 font-semibold text-main">
+                        장소 선택
+                      </h4>
+                    </div>
+                    <PlaceContainer />
+                  </div>
+                </div>
+                <div className="px-24 py-30">
+                  <PlaceController />
+                </div>
+              </div>
             ),
           },
           {
             title: "숙소 선택",
             content: () => (
-              <Layout startDate={startDate} endDate={endDate}>
+              <div className="px-24 py-30 flex flex-col gap-y-18 overflow-y-hidden h-full">
+                <PlanControllerHeader startDate={startDate} endDate={endDate} />
                 <div></div>
-              </Layout>
+              </div>
             ),
           },
         ]}
       />
-    </div>
-  );
-}
-
-function Layout({
-  startDate,
-  endDate,
-  children,
-}: PropsWithChildren<{ startDate: Date | null; endDate: Date | null }>) {
-  return (
-    <div className="px-24 py-30 flex flex-col gap-y-18 overflow-y-hidden h-full">
-      <PlanControllerHeader startDate={startDate} endDate={endDate} />
-      {children}
     </div>
   );
 }
