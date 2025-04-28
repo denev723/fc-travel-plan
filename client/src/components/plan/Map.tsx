@@ -64,7 +64,14 @@ export function MapPath({
   path: { lat: number; lng: number }[];
   options?: { color?: `#${string}` };
 }) {
-  return <Polyline path={path} options={{ strokeColor: color }} />;
+  return (
+    <Polyline
+      path={path}
+      options={{
+        strokeColor: color,
+      }}
+    />
+  );
 }
 
 const generateMarkerIcon = (color: `#${string}`) => {

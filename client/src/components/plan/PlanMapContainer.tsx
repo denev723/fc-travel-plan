@@ -13,6 +13,7 @@ export default function PlanMapContainer({ coordinates }: Props) {
   const markers = plannedPlaces.map(
     (plannedPlace) => plannedPlace.place.coordinates
   );
+
   return (
     <Map center={coordinates}>
       {markers.map((marker, idx) => (
@@ -23,7 +24,11 @@ export default function PlanMapContainer({ coordinates }: Props) {
           label={`${idx + 1}`}
         />
       ))}
-      <MapPath path={markers} options={{ color: "#0095a9" }} />
+      <MapPath
+        key={JSON.stringify(markers)}
+        path={markers}
+        options={{ color: "#0095a9" }}
+      />
     </Map>
   );
 }
