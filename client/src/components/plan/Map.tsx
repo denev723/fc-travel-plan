@@ -1,8 +1,8 @@
 import {
   GoogleMap,
-  LoadScript,
   MarkerF,
   Polyline,
+  useLoadScript,
 } from "@react-google-maps/api";
 import { PropsWithChildren } from "react";
 
@@ -19,17 +19,21 @@ interface Props {
   }[];
 }
 
+export function MapProvider({ children }: PropsWithChildren) {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: API_KEY,
+  });
+
+  if (!isLoaded) return null;
+
+  return <>{children}</>;
+}
+
 export default function Map({ center, children }: PropsWithChildren<Props>) {
   return (
-    <LoadScript googleMapsApiKey={API_KEY}>
-      <GoogleMap
-        center={center}
-        zoom={12}
-        mapContainerClassName="w-full h-full"
-      >
-        {children}
-      </GoogleMap>
-    </LoadScript>
+    <GoogleMap center={center} zoom={12} mapContainerClassName="w-full h-full">
+      {children}
+    </GoogleMap>
   );
 }
 

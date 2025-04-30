@@ -46,3 +46,10 @@ export interface Place {
   rating: number;
   city: City["code"];
 }
+
+export interface ItineraryItem {
+  place: Place;
+  duration: number;
+  startTime: string;
+  endTime: string;
+}

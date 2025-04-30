@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { create } from "zustand";
 import { Place } from "../../server/types";
 
-interface State {
+export interface PlanState {
   startDate: Date | null;
   endDate: Date | null;
   status: "period_edit" | "planning";
@@ -18,7 +18,7 @@ interface State {
 type Action = {
   setStartDate: (date: Date | null) => void;
   setEndDate: (date: Date | null) => void;
-  setStatus: (status: State["status"]) => void;
+  setStatus: (status: PlanState["status"]) => void;
   setDailyTimes: (
     index: number,
     time: string,
@@ -31,7 +31,7 @@ type Action = {
   removePlannedAccommodation: (index: number) => void;
 };
 
-export const usePlanStore = create<State & Action>()((set, get) => ({
+export const usePlanStore = create<PlanState & Action>()((set, get) => ({
   startDate: null,
   endDate: null,
   status: "period_edit" as const,
@@ -106,6 +106,7 @@ interface ModalState {
 type ModalAction = {
   openModal: (modal: FunctionComponent<{ onClose: () => void }>) => void;
   closeModal: (index: number) => void;
+  clearModals: () => void;
 };
 
 export const useModalStore = create<ModalState & ModalAction>()((set) => ({
@@ -113,4 +114,5 @@ export const useModalStore = create<ModalState & ModalAction>()((set) => ({
   openModal: (modal) => set((state) => ({ modals: [...state.modals, modal] })),
   closeModal: (index) =>
     set((state) => ({ modals: state.modals.filter((_, i) => i !== index) })),
+  clearModals: () => set({ modals: [] }),
 }));
