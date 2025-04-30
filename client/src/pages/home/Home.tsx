@@ -10,11 +10,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 export default function Home() {
-  // const {data} = useQuery()
   const [q, setQ] = useState("");
+  const [filter, setFilter] = useState<"all" | "domestic" | "international">(
+    "all"
+  );
   const { isLoading, data } = useQuery({
-    queryKey: ["cities", q],
-    queryFn: q ? () => getSearchedCities(q) : getCities,
+    queryKey: ["cities", q, filter],
+    queryFn: q
+      ? () => getSearchedCities(q)
+      : () => getCities(filter === "all" ? undefined : filter),
   });
 
   const { openModal } = useModalStore();
@@ -42,7 +46,7 @@ export default function Home() {
           <SearchInput onSearch={(value) => setQ(value)} />
         </div>
         <div className="mb-21">
-          <FilterList active="all" onChange={() => {}} />
+          <FilterList active={filter} onChange={(f) => setFilter(f)} />
         </div>
         <CityList cities={data} />
       </NarrowLayout>

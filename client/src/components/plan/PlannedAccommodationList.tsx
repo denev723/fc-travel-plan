@@ -20,14 +20,18 @@ export default function PlannedAccommodationList({
         const targetDate = addDays(startDate, index);
         return plannedAccommodation ? (
           <PlannedAccommodation
-            key={`${plannedAccommodation.name}_${index}`}
+            key={`${plannedAccommodation.name}-${index}`}
             plannedAccommodation={plannedAccommodation}
             index={index}
             onDeleteAccommodation={() => onDeleteAccommodation(index)}
             targetDate={targetDate}
           />
         ) : (
-          <EmptyAccommodation index={index} targetDate={targetDate} />
+          <EmptyAccommodation
+            key={`empty-${index}`}
+            index={index}
+            targetDate={targetDate}
+          />
         );
       })}
     </div>

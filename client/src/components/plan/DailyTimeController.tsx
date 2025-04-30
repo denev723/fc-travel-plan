@@ -51,6 +51,7 @@ export default function DailyTimeController({
                     <td className="py-10">{format(dailyTime.date, "EEE")}</td>
                     <td className="py-10">
                       <input
+                        data-testid="daily-time-start"
                         type="time"
                         value={dailyTime.startTime}
                         onChange={(e) =>
@@ -60,6 +61,7 @@ export default function DailyTimeController({
                     </td>
                     <td className="py-10">
                       <input
+                        data-testid="daily-time-end"
                         type="time"
                         value={dailyTime.endTime}
                         onChange={(e) =>

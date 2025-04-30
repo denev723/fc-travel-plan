@@ -2,8 +2,10 @@ import Loading from "@/components/common/Loading";
 import WideLayout from "@/components/common/WideLayout";
 import ItineraryController from "@/components/itinerary/ItineraryController";
 import useGenerateItinerary from "@/hooks/itinerary/useGenerateItinerary";
+import { planQueries } from "@/services/queryFactory";
 import { usePlanStore } from "@/store";
 import { ItineraryItem } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,8 +13,9 @@ export default function ItineraryCity() {
   const { generateItinerary } = useGenerateItinerary();
 
   const { plannedPlaces, dailyTimes } = usePlanStore();
-  const { city } = useParams();
+  const { city = "" } = useParams();
   const navigate = useNavigate();
+  const { data, isLoading } = useQuery(planQueries.city(city!));
 
   const [itinerary, setItinerary] = useState<ItineraryItem[][] | null>(null);
 
@@ -28,7 +31,11 @@ export default function ItineraryCity() {
 
   return (
     <WideLayout>
-      {!itinerary ? <Loading /> : <ItineraryController itinerary={itinerary} />}
+      {!itinerary || !data || isLoading ? (
+        <Loading />
+      ) : (
+        <ItineraryController itinerary={itinerary} city={data} />
+      )}
     </WideLayout>
   );
 }

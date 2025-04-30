@@ -57,7 +57,10 @@ function findOptimalRoute(matrix: google.maps.DistanceMatrixResponse) {
     for (let i = 0; i < length; i++) {
       if (visited.has(i)) continue;
 
-      const distance = matrix.rows[current].elements[i].distance.value;
+      const element = matrix.rows[current]?.elements[i];
+      if (!element?.distance?.value) continue;
+
+      const distance = element.distance.value;
       if (distance < min) {
         min = distance;
         next = i;
@@ -67,6 +70,9 @@ function findOptimalRoute(matrix: google.maps.DistanceMatrixResponse) {
     if (next !== -1) {
       route.push(next);
       visited.add(next);
+    } else {
+      console.warn("Unable to find valid route between locations");
+      break;
     }
   }
 
@@ -164,8 +170,8 @@ function groupPlacesByDay(
 }
 
 function getDailyTimes({
-  startTime,
-  endTime,
+  startTime = "",
+  endTime = "",
 }: {
   startTime: string;
   endTime: string;
